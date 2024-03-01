@@ -1,3 +1,56 @@
 body{
-    background-color: aquamarine;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 200px 200px 200px;
+    background-image: url("./images/green-circle.png");
+    background-position: center;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    padding: 200px;
+    gap: 40px;
+    position: fixed;
+}
+
+
+.animal-box{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.animal-img{
+    width: 175px;
+    align-items: center;
+}
+
+.bunny{
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+}
+
+.cat{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+.chick{
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+
+.turtle{
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.hover{
+    width: 200px;
 }
