@@ -5,6 +5,10 @@ body{
     justify-content: center;
 }
 
+.heading{
+    text-align: center;
+}
+
 .container{
     display: grid;
     grid-template-columns: 200px 200px 200px;
@@ -15,7 +19,6 @@ body{
     background-repeat: no-repeat;
     padding: 200px;
     gap: 40px;
-    position: fixed;
 }
 
 
@@ -53,4 +56,8 @@ body{
 
 .hover{
     width: 200px;
+}
+
+.pressed{
+    background: black;
 }
