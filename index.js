@@ -9,14 +9,29 @@ let correctSequence = [];
 let userPositionInSequence = 0;
 let levelNumber = 0;
 let gameHasStarted = false;
+let isUpsideDown = false;
 
 //User clicks any key, game begins
 $(document).on("keydown", decideIfGameBegins);
 
 function decideIfGameBegins(){
     if(!gameHasStarted){
-        gameBegins();
-    }
+        if(isUpsideDown){
+            $('.animal-img').animate(
+                { deg: 0 },
+                {
+                  duration: 100,
+                  step: function(now) {
+                    $(this).css({ transform: 'rotate(' + now + 'deg)' });
+                  }
+                }
+          );
+          setTimeout(gameBegins, 500);
+        }else{
+            gameBegins();
+        } 
+    } 
+    
 }
 
 //Computer randomly selects a button
@@ -47,22 +62,41 @@ function updateH1(levelNumber){
 
 function userAnimalSelection(event){
     let clickedAnimal = event.target.classList[0];
-    userAnimalSelectionAnimation(clickedAnimal);
-    animalSound(clickedAnimal);
-    console.log(clickedAnimal);
-    if(clickedAnimal == correctSequence[userPositionInSequence]){
+    if(clickedAnimal != correctSequence[userPositionInSequence]){
+        //Turn off the event listeners
+        $(".animal-box").off("click");
+        resetGame();
+    }else{
+        userAnimalSelectionAnimation(clickedAnimal);
+        animalSound(clickedAnimal);
         userPositionInSequence++;
         if(userPositionInSequence == correctSequence.length){
             setTimeout(computerRandomAnimalSelection, 1000);
             userPositionInSequence = 0;
         }
-    }else{
-        resetGame();
     }
 }
 
 function userAnimalSelectionAnimation(animalType){
-    $("." + animalType).addClass("pressed");
+    $("." + animalType + ".animal-box").addClass("pressed");
+    $('.' + animalType).animate(
+          { deg: 10 },
+          {
+            duration: 200,
+            step: function(now) {
+              $(this).css({ transform: 'rotate(' + now + 'deg)' });
+            }
+          }
+    ).animate(
+        { deg: 0 },
+        {
+          duration: 200,
+          step: function(now) {
+            $(this).css({ transform: 'rotate(' + now + 'deg)' });
+          }
+        }
+  );
+    
     setTimeout(function(){$("." + animalType).removeClass("pressed");}, 100);
 }
 
@@ -71,16 +105,24 @@ function computerSelectionAnimalAnimation(animalType){
 }
 
 function resetGame(){
-    //Turn off the event listeners
-    $(".animal-box").off("click");
+    gameHasStarted = false;
     correctSequence = [];
     userPositionInSequence = 0;
-    levelNumber = 0;
-    $("body").addClass("game-over")
-    setTimeout(function() {$("body").removeClass("game-over")}, 250);
-    animalSound('failure');
     $("h1").text("Game Over, Press Any Key to Restart");
-    gameHasStarted = false;
+    levelNumber = 0;
+    $(".container").addClass("container-failed");
+    setTimeout(function() {$(".container").removeClass("container-failed");}, 2000);
+    animalSound('failure');
+    $('.animal-img').animate(
+        { deg: 180 },
+        {
+          duration: 500,
+          step: function(now) {
+            $(this).css({ transform: 'rotate(' + now + 'deg)' });
+          }
+        }
+    );
+    isUpsideDown = true;
 }
 
 function animalSound(animalType){

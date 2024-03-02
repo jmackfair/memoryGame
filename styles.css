@@ -1,37 +1,57 @@
 body{
     display: flex;
-    height: 100vh;
+    flex-direction: column;
+    height: 98vh;
     align-items: center;
     justify-content: center;
+    background-color: #426433;
 }
 
 .heading{
     text-align: center;
+    width: 100%;
+    font-family: "Exo 2", sans-serif;
+    font-size: 3rem;
+    margin-bottom: 100px;
+    color: #9fe2ca;
 }
 
 .container{
     display: grid;
     grid-template-columns: 200px 200px 200px;
     grid-template-rows: 200px 200px 200px;
-    background-image: url("./images/green-circle.png");
+    background-color: #9fe2ca;
     background-position: center;
-    background-size: 90%;
+    border-radius: 100%;
     background-repeat: no-repeat;
-    padding: 200px;
     gap: 40px;
+    padding: 20px;
 }
 
+.container-failed{
+    background-color: #24302C;
+}
 
 .animal-box{
     display: flex;
-    height: 100%;
+    width: 100%;
     align-items: center;
     justify-content: center;
+    background-color: #5DAF91;
+    border-radius: 50%;
+    border: solid #426433;
 }
 
+.pressed{
+    background-color: #426433;
+}
+
+
 .animal-img{
-    width: 175px;
+    height: 100%;
+    width: 100%;
     align-items: center;
+    object-fit: contain;
 }
 
 .bunny{
@@ -55,9 +75,43 @@ body{
 }
 
 .hover{
-    width: 200px;
+    width: 110%;
+    height: 110%;
 }
 
-.pressed{
-    background: black;
+
+.game-over{
+    background-color: rgb(241, 163, 216);
+}
+
+
+@media only screen and (max-width: 768px){
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        background-color: #426433;
+    }
+    
+    .container{
+        display: grid;
+        grid-template-columns: 100px 100px 100px;
+        grid-template-rows: 100px 100px 100px;
+        background-color: #9fe2ca;
+        background-position: center;
+        border-radius: 100%;
+        background-repeat: no-repeat;
+        gap: 40px;
+        padding: 20px;
+    }
+
+    .heading{
+        text-align: center;
+        width: 100%;
+        font-family: "Exo 2", sans-serif;
+        font-size: 2rem;
+        margin-bottom: 50px;
+        color: #9fe2ca;
+    }
 }
